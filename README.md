@@ -1,5 +1,5 @@
 # GetChan
-A simple, light, fast C program to download all images from a 4chan thread.
+A simple, light, fast C program to download all images and webms from a 4chan thread.
 
 ## Building and installing
 
