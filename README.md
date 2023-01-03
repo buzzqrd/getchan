@@ -27,6 +27,19 @@ and to install the binary:
 sudo make install
 ```
 
+## Usage
+
+After installing, the easiest way to download thread images is to move into the directory where the images will be saved and then run GetChan.
+```shell
+cd wallpaper_downloads/
+getchan [THREAD-URL]
+```
+
+To download the images to a specific path, you can do something like this:
+```shell
+getchan [THREAD-URL] -o ~/home/user/wallpaper_downloads/
+```
+
 
 ## Contributing
 
