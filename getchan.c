@@ -75,12 +75,12 @@ int download_file(const char *dir, const char *uri){
 	while(*fl != '/'){
 		if(*fl == '.'){ has_ext = 1; }
 		fl--;
-	} fl++;
+	}
 	#ifndef GETCHAN_DIRECT_LINK
-		char *bfl = fl-2;
-		while(*bfl != '/'){ //include the board name
-			bfl--;
-		} bfl++;
+	char *bfl = fl-1;
+	while(*bfl != '/'){ //include the board name
+		bfl--;
+	}
 	#endif
 	if(!has_ext){ return(0); }
 	if(strstr(uri, ".js") != NULL){ return(1);}
@@ -88,7 +88,6 @@ int download_file(const char *dir, const char *uri){
 	char savefile[LARGEST_PATH];
 	memset(savefile, 0, LARGEST_PATH);
 	strcpy(savefile, dir);
-	strcat(savefile, "/");
 	strcat(savefile, fl);
 
 	char url[LARGEST_PATH];
@@ -97,7 +96,7 @@ int download_file(const char *dir, const char *uri){
 		strcpy(url, "https://");
 		strcat(url, uri);
 	#else  /* new verison */
-		strcpy(url, "https://i.4cdn.org/");
+		strcpy(url, "https://i.4cdn.org");
 		strcat(url, bfl);
 	#endif
 
