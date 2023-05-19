@@ -14,6 +14,10 @@ this program. If not, see <https://www.gnu.org/licenses/>.
 
 */
 
+/* Uncomment to use the old, outdated version that 
+downloads the direct given by 4chan */
+//#define GETCHAN_DIRECT_LINK
+
 #include <stdio.h>
 #include <string.h>
 #include <curl/curl.h>
@@ -72,6 +76,12 @@ int download_file(const char *dir, const char *uri){
 		if(*fl == '.'){ has_ext = 1; }
 		fl--;
 	} fl++;
+	#ifndef GETCHAN_DIRECT_LINK
+		char *bfl = fl-2;
+		while(*bfl != '/'){ //include the board name
+			bfl--;
+		} bfl++;
+	#endif
 	if(!has_ext){ return(0); }
 	if(strstr(uri, ".js") != NULL){ return(1);}
 
@@ -83,8 +93,13 @@ int download_file(const char *dir, const char *uri){
 
 	char url[LARGEST_PATH];
 	memset(url, 0, LARGEST_PATH);
-	strcpy(url, "https://");
-	strcat(url, uri);
+	#ifdef GETCHAN_DIRECT_LINK
+		strcpy(url, "https://");
+		strcat(url, uri);
+	#else  /* new verison */
+		strcpy(url, "https://i.4cdn.org/");
+		strcat(url, bfl);
+	#endif
 
 	printf("Downloading %s to %s\n", url, savefile);
 
